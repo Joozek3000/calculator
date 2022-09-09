@@ -4,44 +4,42 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/style.css" />
     <script src="/script.js" defer></script>
     <title>Calculator</title>
   </head>
   <body>
     <main id="main">
-      <div id="container">
-        <div id="display">0</div>
-        <div class="clear" type="button" value="clear" data-key="8">AC</div>
-        <div class="sign" type="button" value="sign" data-key="220">+/-</div>
-        <div class="percent" type="button" value="percent" data-key="58">%</div>
-        <div class="operator" type="button" value="/" data-key="111">/</div>
-        <div class="operand" type="button" value="7" data-key="103">7</div>
-        <div class="operand" type="button" value="8" data-key="104">8</div>
-        <div class="operand" type="button" value="9" data-key="105">9</div>
-        <div class="operator" type="button" value="*" data-key="106">*</div>
-        <div class="operand" type="button" value="4" data-key="100">4</div>
-        <div class="operand" type="button" value="5" data-key="101">5</div>
-        <div class="operand" type="button" value="6" data-key="102">6</div>
-        <div class="operator" type="button" value="-" data-key="109">-</div>
-        <div class="operand" type="button" value="1" data-key="97">1</div>
-        <div class="operand" type="button" value="2" data-key="98">2</div>
-        <div class="operand" type="button" value="3" data-key="99">3</div>
-        <div class="operator" type="button" value="+" data-key="107">+</div>
-        <div id="zero" class="operand" type="button" value="0" data-key="96">
-          0
+      <div class="calculator-grid">
+        <div class="display">
+          <div data-previous-operand class ='previous-operand'>124 +</div>
+          <div data-current-operand class ='current-operand'>0</div>
         </div>
-        <div
-          id="decimal"
-          class="decimal"
-          type="button"
-          value=","
-          data-key="108"
-        >
-          .
-        </div>
-        <div id="equal" class="equal" type="button" value="=" data-key="13">
-          =
+        <button class="function-button" data-all-clear>AC</button>
+        <button class="function-button" data-delete>DEL</button>
+        <button class="function-button" data-sign>+/-</button>
+        <button class="operator" data-operation>/</button>
+        <button class="number" data-number>7</button>
+        <button class="number" data-number>8</button>
+        <button class="number" data-number>9</button>
+        <button class="operator" data-operation>*</button>
+        <button class="number" data-number>4</button>
+        <button class="number" data-number>5</button>
+        <button class="number" data-number>6</button>
+        <button class="operator" data-operation>-</button>
+        <button class="number" data-number>1</button>
+        <button class="number" data-number>2</button>
+        <button class="number" data-number>3</button>
+        <button class="operator" data-operation>+</button>
+        <button class="span-two" data-number >0</button>
+        <button class="number" data-number>.</button>
+        <button class="operator" data-equals>=</button>
         </div>
       </div>
     </main>
