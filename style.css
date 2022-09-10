@@ -61,7 +61,8 @@ main {
 }
 
 .number,
-.span-two {
+.span-two,
+.dot {
   background-color: #217c7e;
 }
 
