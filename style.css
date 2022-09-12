@@ -10,11 +10,12 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to right, #cbce91ff, #ea738dff);
+  background: linear-gradient(35deg, #cbce91ff, #ea738dff, #ef9878);
 }
 
 .calculator-grid {
   display: grid;
+  height: 675px;
   gap: 4px;
   background-color: black;
   grid-template-columns: repeat(4, 100px);

@@ -1,16 +1,19 @@
 'use strict';
 const numbersBtn = document.querySelectorAll('[data-number]');
-const operationsBtn = document.querySelectorAll('[data-operations]');
+const operationsBtn = document.querySelectorAll('[data-operation]');
 const equalsBtn = document.querySelector('[data-equals]');
 const clearBtn = document.querySelector('[data-all-clear]');
 const deleteBtn = document.querySelector('[data-delete]');
 const signBtn = document.querySelector('[data-sign]');
 const previousOperand = document.querySelector('[data-previous-operand]');
 const currentOperand = document.querySelector('[data-current-operand]');
-const fuctionBtn = document.querySelectorAll('.function-button');
 
 numbersBtn.forEach((number) => {
   number.dataset.number = number.textContent;
+});
+
+operationsBtn.forEach((operation) => {
+  operation.dataset.operation = operation.textContent;
 });
 
 // displaying numbers
@@ -29,15 +32,22 @@ numbersBtn.forEach((button) => {
   });
 });
 
-// function buttons
-fuctionBtn.forEach((button) => {
-  button.addEventListener('click', (e) => {});
+// operations buttons functionality
+
+operationsBtn.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    previousOperand.textContent =
+      currentOperand.textContent + e.target.textContent;
+    currentOperand.textContent = '0';
+  });
 });
 
 // clear button
 clearBtn.addEventListener('click', () => {
   const clear = () => {
     currentOperand.textContent = '0';
+    previousOperand.textContent = '';
+    document.querySelector('.dot').disabled = false;
   };
   return clear();
 });
@@ -49,6 +59,9 @@ deleteBtn.addEventListener('click', () => {
       0,
       currentOperand.textContent.length - 1
     );
+  }
+  if (currentOperand.textContent === '') {
+    currentOperand.textContent = '0';
   }
 });
 
@@ -67,6 +80,20 @@ signBtn.addEventListener('click', () => {
       currentOperand.textContent = displayArr.join('');
     }
   }
+  if (currentOperand.textContent === '') {
+    currentOperand.textContent = '0';
+  }
+});
+
+// equals button functionality
+equalsBtn.addEventListener('click', () => {
+  const current = parseFloat(currentOperand.textContent);
+  const previous = parseFloat(previousOperand.textContent);
+
+  if (operator === '+') {
+    currentOperand.textContent = add(current, previous);
+  }
+  console.log(previous, operator, current);
 });
 
 // addition
