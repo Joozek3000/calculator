@@ -8,6 +8,11 @@ const signBtn = document.querySelector('[data-sign]');
 const previousOperand = document.querySelector('[data-previous-operand]');
 const currentOperand = document.querySelector('[data-current-operand]');
 
+let operation = null;
+let current = '';
+let previous = '';
+let result = '';
+
 numbersBtn.forEach((number) => {
   number.dataset.number = number.textContent;
 });
@@ -19,10 +24,11 @@ operationsBtn.forEach((operation) => {
 // displaying numbers
 numbersBtn.forEach((button) => {
   button.addEventListener('click', (e) => {
+    const { number } = e.target.dataset;
     let displayStr = currentOperand.textContent;
     displayStr === '0'
-      ? (currentOperand.textContent = e.target.textContent)
-      : (currentOperand.textContent += e.target.textContent);
+      ? (currentOperand.textContent = number)
+      : (currentOperand.textContent += number);
     // check if decimal point is already pressed
     if (displayStr.includes('.') === true) {
       document.querySelector('.dot').disabled = true;
@@ -32,14 +38,15 @@ numbersBtn.forEach((button) => {
   });
 });
 
-// operations buttons functionality
-
+const setOperation = (operator) => {
+  operation = operator;
+  current = currentOperand.textContent;
+  previousOperand.textContent = `${current} ${operation}`;
+  currentOperand.textContent = 0;
+  previous = current;
+};
 operationsBtn.forEach((button) => {
-  button.addEventListener('click', (e) => {
-    previousOperand.textContent =
-      currentOperand.textContent + e.target.textContent;
-    currentOperand.textContent = '0';
-  });
+  button.addEventListener('click', () => setOperation(button.textContent));
 });
 
 // clear button
@@ -72,6 +79,7 @@ signBtn.addEventListener('click', () => {
   } else {
     let displayArr = currentOperand.textContent.split('');
     // if display number is negative, delete '-'
+
     if (displayArr[0] === '-') {
       displayArr.shift();
       currentOperand.textContent = displayArr.join('');
@@ -87,13 +95,14 @@ signBtn.addEventListener('click', () => {
 
 // equals button functionality
 equalsBtn.addEventListener('click', () => {
-  const current = parseFloat(currentOperand.textContent);
-  const previous = parseFloat(previousOperand.textContent);
-
-  if (operator === '+') {
-    currentOperand.textContent = add(current, previous);
-  }
-  console.log(previous, operator, current);
+  currentOperand.textContent = operate(
+    previous,
+    currentOperand.textContent,
+    operation
+  );
+  console.log(
+    `previous ${previous} current ${current.textContent} operation ${operation}`
+  );
 });
 
 // addition
@@ -116,25 +125,24 @@ const divide = (a, b) => {
   return a / b;
 };
 
-// fuction that computes the result when user press '=' button
-const operate = (operator, a, b) => {
-  if (operator === 'add') {
-    return add(a, b);
-  } else if (operator === 'subtract') {
-    return subtract(a, b);
-  } else if (operator === 'multiply') {
-    return multiply(a, b);
-  } else if (operator === 'divide') {
-    return divide(a, b);
+const operate = (a, b, operator) => {
+  let num1 = parseFloat(a);
+  let num2 = parseFloat(b);
+  let result = 0;
+  switch (operator) {
+    case '+':
+      result = add(num1, num2);
+      break;
+    case '-':
+      result = subtract(num1, num2);
+      break;
+    case '*':
+      result = multiply(num1, num2);
+      break;
+    case '/':
+      result = divide(num1, num2);
+      break;
+    default:
   }
+  return result;
 };
-
-// const deleteFunc = () => {};
-
-// const appendNumber = (number) => {};
-
-// const chooseOperation = (operation) => {};
-
-// const compute = () => {};
-
-// const updateDisplay = () => {};
