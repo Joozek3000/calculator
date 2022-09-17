@@ -79,7 +79,6 @@ signBtn.addEventListener('click', () => {
   } else {
     let displayArr = currentOperand.textContent.split('');
     // if display number is negative, delete '-'
-
     if (displayArr[0] === '-') {
       displayArr.shift();
       currentOperand.textContent = displayArr.join('');
@@ -99,9 +98,6 @@ equalsBtn.addEventListener('click', () => {
     previous,
     currentOperand.textContent,
     operation
-  );
-  console.log(
-    `previous ${previous} current ${current.textContent} operation ${operation}`
   );
 });
 
