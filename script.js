@@ -17,10 +17,6 @@ numbersBtn.forEach((number) => {
   number.dataset.number = number.textContent;
 });
 
-operationsBtn.forEach((operation) => {
-  operation.dataset.operation = operation.textContent;
-});
-
 // displaying numbers
 numbersBtn.forEach((button) => {
   button.addEventListener('click', (e) => {
@@ -42,22 +38,22 @@ const setOperation = (operator) => {
   operation = operator;
   current = currentOperand.textContent;
   previousOperand.textContent = `${current} ${operation}`;
-  currentOperand.textContent = 0;
+  currentOperand.textContent = '';
   previous = current;
 };
+
 operationsBtn.forEach((button) => {
   button.addEventListener('click', () => setOperation(button.textContent));
 });
 
+const clear = () => {
+  currentOperand.textContent = '0';
+  previousOperand.textContent = '';
+  document.querySelector('.dot').disabled = false;
+};
+
 // clear button
-clearBtn.addEventListener('click', () => {
-  const clear = () => {
-    currentOperand.textContent = '0';
-    previousOperand.textContent = '';
-    document.querySelector('.dot').disabled = false;
-  };
-  return clear();
-});
+clearBtn.addEventListener('click', () => clear());
 
 // delete button
 deleteBtn.addEventListener('click', () => {
@@ -94,11 +90,13 @@ signBtn.addEventListener('click', () => {
 
 // equals button functionality
 equalsBtn.addEventListener('click', () => {
+  let current = currentOperand.textContent;
   currentOperand.textContent = operate(
     previous,
     currentOperand.textContent,
     operation
   );
+  previousOperand.textContent += ' ' + current + ' ' + '=';
 });
 
 // addition
@@ -140,5 +138,6 @@ const operate = (a, b, operator) => {
       break;
     default:
   }
+  console.log(parseFloat(a));
   return result;
 };
