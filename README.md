@@ -1,3 +1,5 @@
+<a href="https://joozek3000.github.io/calculator/">Live Demo</a>
+
 Overview
 
 This is a simple JavaScript calculator that allows the user to perform basic mathematical operations such as addition, subtraction, multiplication, and division. It uses a combination of event listeners and DOM manipulation to display the numbers and results on the screen.
